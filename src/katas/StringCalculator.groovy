@@ -2,18 +2,34 @@ package katas
 
 class StringCalculator {
 
+	
 	static def add(def serie) {
-		
+		def LISTA_SEPARADORES = [",","\n","@"]
 		int result = 0
 		
-		if (serie.size() == 1) {
-			result = Integer.parseInt(serie)
-		} else if (serie != "") {
-			serie.split(',').each {
-				result += Integer.parseInt(it)
+		def separador = obtenerSeparador(serie)
+		if (separador != "") {
+			serie.split(separador).each { miniLista->
+				result += add(miniLista)
 			}
+		} else if (serie != "") {
+			result = Integer.parseInt(serie)
 		}
 		
 		return result
 	}
+	
+
+	static def obtenerSeparador(def serie) {
+		def LISTA_SEPARADORES = [",","\n","@"]
+		def result = ""
+		
+		LISTA_SEPARADORES.each {
+			if (serie.contains(it)) {
+				result = it
+			}
+		}
+		
+		return result
+	}	
 }
