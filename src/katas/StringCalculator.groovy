@@ -2,9 +2,10 @@ package katas
 
 class StringCalculator {
 
+	static def LISTA_SEPARADORES = [",","\n","@"]
 	
 	static def add(def serie) {
-		def LISTA_SEPARADORES = [",","\n","@"]
+		
 		int result = 0
 		
 		def separador = obtenerSeparador(serie)
@@ -21,7 +22,7 @@ class StringCalculator {
 	
 
 	static def obtenerSeparador(def serie) {
-		def LISTA_SEPARADORES = [",","\n","@"]
+		
 		def result = ""
 		
 		LISTA_SEPARADORES.each {
