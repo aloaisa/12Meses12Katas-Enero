@@ -2,13 +2,16 @@ package katas
 
 class StringCalculator {
 
-	static def LISTA_SEPARADORES = [",","\n","@"]
+	def LISTA_SEPARADORES = [",","\n","@"]
 	
-	static def add(def serie) {
+	def add(def serie) {
 		
 		int result = 0
 		
+		serie = addSeparadorPasado(serie)
+		
 		def separador = obtenerSeparador(serie)
+		
 		if (separador != "") {
 			serie.split(separador).each { miniLista->
 				result += add(miniLista)
@@ -19,9 +22,18 @@ class StringCalculator {
 		
 		return result
 	}
-	
 
-	static def obtenerSeparador(def serie) {
+	def addSeparadorPasado(String serie) {
+		
+		serie.find(/\/\/(.+)\n(.+)/) { match ->
+			LISTA_SEPARADORES << match[1]
+			serie = match[2]
+		}
+		
+		return serie
+	}
+	
+	def obtenerSeparador(def serie) {
 		
 		def result = ""
 		
